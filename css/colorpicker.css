@@ -1,0 +1,16 @@
+.colorpicker-demo{
+    width:80px;
+    height:80px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.colorpicker-progress progress[value]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background-color:#fff;
+}
+.colorpicker-text-value{
+    width:30px;
+}
