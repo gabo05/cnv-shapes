@@ -9,6 +9,11 @@
   "moduleType": [
     "es6"
   ],
+  "dependencies":[
+    "angular",
+    "materialize"
+    "jquery"
+  ],
   "keywords": [
     "draw",
     "canvas",
