@@ -3,13 +3,21 @@
 }
 
 .canvas{
+/*
     clear: both;
     position: absolute;
     top: 10%;
     left: 24.5%;
+*/
+    width: 100%;
     background-color:transparent;
     cursor:crosshair;
 }
+.cns-tool-item{
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+/*
 button[id^="canvas-tool-"]{
     width:23px;
     height:23px;
@@ -35,7 +43,10 @@ button[id^="canvas-tool-"]{
 #canvas-tool-brush{
     background: url(../img/pincel.png) no-repeat;
 }
-
+*/
 .canvas-text-value{
     width:30px;
+}
+#canvas-text-writer{
+    display: none;
 }

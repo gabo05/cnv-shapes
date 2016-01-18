@@ -1,0 +1,29 @@
+{
+  "name": "cnv-shapes",
+  "homepage": "https://github.com/gabo05/cnv-shapes",
+  "authors": [
+    "gabo05 <san.gaby05@gmail.com>"
+  ],
+  "description": "Simple draw tool",
+  "main": "",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "draw",
+    "canvas",
+    "html5",
+    "paint",
+    "tool",
+    "angular"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
