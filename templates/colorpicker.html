@@ -1,0 +1,36 @@
+<div class="s12" id="colorpicker-canvas-colors">
+    <div class="colorpicker-red s12">
+        <div class="s6 colorpicker-progress">
+            <input type="range" max="256" min="0" ng-model="colorpicker.red">
+        </div>
+        <div class="s2">
+            <input type="text" id="colorpicker-value-red" ng-change="colorpicker.updatePreview()" class="colorpicker-text-value" ng-model="colorpicker.red">
+        </div>
+    </div>
+    <div class="colorpicker-green s12">
+        <div class="s6 colorpicker-progress">
+            <input type="range" max="256" min="0" ng-model="colorpicker.green">
+        </div>
+        <div class="s2">
+            <input type="text" id="colorpicker-value-green" class="colorpicker-text-value" ng-model="colorpicker.green">
+        </div>
+    </div>
+    <div class="colorpicker-blue s12">
+        <div class="s6 colorpicker-progress">
+            <input type="range" max="256" min="0" ng-model="colorpicker.blue">
+        </div>
+        <div class="s2">
+            <input type="text" id="colorpicker-value-blue" class="colorpicker-text-value" ng-model="colorpicker.blue">
+        </div>
+    </div>
+    <div class="colorpicker-alfa s12">
+        <div class="s6 colorpicker-progress">
+            <input type="range" max="100" min="0" ng-model="colorpicker.alpha">
+        </div>
+        <div class="s2">
+            <input type="text" id="colorpicker-value-alfa" class="colorpicker-text-value" ng-model="colorpicker.alpha">
+        </div>
+    </div>
+    <div class="colorpicker-preview l6 offset-l3 m4 offset-m4 s12" ng-style="colorpicker.RGBA">
+    </div>
+</div>

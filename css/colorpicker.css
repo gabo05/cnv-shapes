@@ -1,16 +1,74 @@
+input[type=range]::-webkit-slider-runnable-track
+, input[type=range]::-moz-range-track{
+    width: 300px;
+    height: 5px;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb
+, input[type=range]::-moz-range-thumb{
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    margin-top: -4px;
+}
+/*Red Range*/
+.colorpicker-red input[type=range]::-webkit-slider-runnable-track{
+    background: rgba(256,0,0,0.5);
+}
+.colorpicker-red input[type=range]::-moz-range-track{
+    background: rgba(256,0,0,0.5);
+}
+.colorpicker-red input[type=range]::-webkit-slider-thumb{
+    background: rgba(256,0,0,1);
+}
+.colorpicker-red input[type=range]::-moz-range-thumb{
+    background: rgba(256,0,0,1);
+}
+/*End red range*/
+/*Green Range*/
+.colorpicker-green input[type=range]::-webkit-slider-runnable-track{
+    background: rgba(0,256,0,0.5);
+}
+.colorpicker-green input[type=range]::-moz-range-track{
+    background: rgba(0,256,0,0.5);
+}
+.colorpicker-green input[type=range]::-webkit-slider-thumb{
+    background: rgba(0,256,0,1);
+}
+.colorpicker-green input[type=range]::-moz-range-thumb{
+    background: rgba(0,256,0,1);
+}
+/*End green range*/
+/*Blue range*/
+.colorpicker-blue input[type=range]::-webkit-slider-runnable-track{
+    background: rgba(0,0,256,0.5);
+}
+.colorpicker-blue input[type=range]::-moz-range-track{
+    background: rgba(0,0,256,0.5);
+}
+.colorpicker-blue input[type=range]::-webkit-slider-thumb{
+    background: rgba(0,0,256,1);
+}
+.colorpicker-blue input[type=range]::-moz-range-thumb{
+    background: rgba(0,0,256,1);
+}
+/*End blue range*/
 .colorpicker-demo{
     width:80px;
     height:80px;
     margin-left:auto;
     margin-right:auto;
 }
-.colorpicker-progress progress[value]{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: none;
-    background-color:#fff;
-}
 .colorpicker-text-value{
     width:30px;
+}
+input[type=range]+.thumb
+, input[type=range]+.thumb.active{
+    display: none;
+}
+.colorpicker-preview{
+    height: 100px;
 }

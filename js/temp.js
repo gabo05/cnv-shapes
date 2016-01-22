@@ -1,3 +1,3 @@
 (function(){
-    $('.canvas-colorpicker').colorpicker();
+    //$('.canvas-colorpicker').colorpicker();
 })();
