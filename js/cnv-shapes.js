@@ -3,6 +3,5 @@
     
     var app = angular.module('cnvShapes', []);
     
-    app.directive('colorpicker', [ '$templateRequest', '$compile', colorpicker]);
-    
+    app.directive('colorpicker', colorpicker);
 })();
