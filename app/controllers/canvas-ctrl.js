@@ -4,6 +4,7 @@ var canvasCtrl = function($scope){
         line: {
             name: 'line',
             init: function(){
+                console.log($scope.lineWidth);
                 console.log('Drawing a line');
             }
         },
