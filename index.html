@@ -39,70 +39,14 @@
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
         </nav>
-        <div class="section no-pad-bot">
+        <div class="section no-pad-bot" ng-controller="canvasCtrl as cnv">
             <div class="row">
                 <div class="col l3 m3 s12">
                     <ul class="collapsible" data-collapsible="expandable">
                         <li>
                             <div class="collapsible-header"><i class="material-icons">work</i>Herramientas</div>
                             <div class="collapsible-body">
-                                <div class="col s12" id="canvas-toolbox">
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="linea" rel="tooltip" id="canvas-tool-line" data-figure="0">
-                                            <i class="material-icons">done_all</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="curva" rel="tooltip" id="canvas-tool-curve" data-figure="1">
-                                            <i class="material-icons">replay</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="cuadro" rel="tooltip" id="canvas-tool-rect-stroke" data-figure="2">
-                                            <i class="material-icons">stay_primary_landscape</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="cuadrado" rel="tooltip" id="canvas-tool-rect-fill" data-figure="3">
-                                            <i class="material-icons">picture_in_picture</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="circunferencia" rel="tooltip" id="canvas-tool-arc-stroke" data-figure="4">
-                                            <i class="material-icons">toll</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="circulo" rel="tooltip" id="canvas-tool-arc-fill" data-figure="5">
-                                            <i class="material-icons">info</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="libre" rel="tooltip" id="canvas-tool-path" data-figure="6">
-                                            <i class="material-icons">polymer</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="poligono (relleno)" rel="tooltip" id="canvas-tool-polygon-fill" data-figure="7">
-                                            <i class="material-icons">label</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="poligono (contorno)" rel="tooltip" id="canvas-tool-polygon-stroke" data-figure="8">
-                                            <i class="material-icons">label_outline</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="texto" rel="tooltip" id="canvas-tool-text" data-figure="9">
-                                            <i class="material-icons">sort_by_alpha</i>
-                                        </a>
-                                    </div>
-                                    <div class="col l6 s12 cns-tool-item">
-                                        <a class="btn-floating btn-large waves-effect waves-light blue darken-1" title="pincel" rel="tooltip" id="canvas-tool-brush" data-figure="10">
-                                            <i class="material-icons">group_work</i>
-                                        </a>
-                                    </div>
-                                </div>
+                                <toolbox></toolbox>
                             </div>
                         </li>
                         <li>
@@ -128,6 +72,7 @@
                         </li>
                     </ul>
                 </div>
+                <button ng-click="currentTool.init()">Show current</button>
                 <div class="col l9 m9 s12">
                     <textarea id="canvas-text-writer"></textarea>
                     <canvas width="800" height="800" id="canvas-canvas" class="canvas"></canvas>
@@ -140,8 +85,14 @@
         <!--Import materialize.js-->
         <script src="bower_components/Materialize/dist/js/materialize.min.js"></script>
         <!--Import angular custom directives-->
-        <script src="directives/colorpicker.js"></script>
+        <script src="app/directives/colorpicker.js"></script>
+        <script src="app/directives/toolbox-item.js"></script>
+        <script src="app/directives/toolbox.js"></script>
+        
+        <!--Import angular controllers-->
+        <script src="app/controllers/canvas-ctrl.js"></script>
+        
         <!--Import AngularJS app-->
-        <script src="js/cnv-shapes.js"></script>
+        <script src="app/cnv-shapes.js"></script>
     </body>
 </html>

@@ -1,0 +1,5 @@
+<div class="col l6 s12 cns-tool-item">
+    <a ng-class="{'btn-floating btn-large waves-effect waves-light':true, 'blue darken-1' : $parent.currentTool.name !== tool, 'purple darken-1' : $parent.currentTool.name === tool}" ng-click="select($event)">
+        <i class="material-icons">{{icon}}</i>
+    </a>
+</div>

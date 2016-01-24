@@ -1,7 +1,7 @@
 var colorpicker = function(){
     return{
         restrict: 'E',
-        templateUrl: 'templates/colorpicker.html',
+        templateUrl: 'app/templates/colorpicker.html',
         bindToController:{
             colorpicker: '='
         },
