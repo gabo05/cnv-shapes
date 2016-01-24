@@ -3,9 +3,15 @@ var canvasCtrl = function($scope){
     $scope.tools = {
         line: {
             name: 'line',
-            init: function(){
+            init: function($event){
                 console.log($scope.lineWidth);
                 console.log('Drawing a line');
+            },
+            drag: function($event){
+                console.log('Line: drawing');
+            },
+            drop: function($event){
+                console.log('Line drop');
             }
         },
         curve: {

@@ -65,12 +65,7 @@
                         </li>
                     </ul>
                 </div>
-                <button ng-click="currentTool.init()">Show current</button>
-                <div class="col l9 m9 s12">
-                    <textarea id="canvas-text-writer"></textarea>
-                    <canvas width="800" height="800" id="canvas-canvas" class="canvas"></canvas>
-                    <canvas width="800" height="800" id="canvas-aux" class="canvas"></canvas>
-                </div>
+                <drawing-area width="800" height="800"></drawing-area>
             </div>
         </div>
         <!--Import jQuery-->
@@ -82,6 +77,7 @@
         <script src="app/directives/toolbox-item.js"></script>
         <script src="app/directives/toolbox.js"></script>
         <script src="app/directives/line-settings.js"></script>
+        <script src="app/directives/drawing-area.js"></script>
         
         <!--Import angular controllers-->
         <script src="app/controllers/canvas-ctrl.js"></script>

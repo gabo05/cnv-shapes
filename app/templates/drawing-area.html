@@ -1,0 +1,7 @@
+<div class="col l9 m9 s12">
+    <textarea id="canvas-text-writer"></textarea>
+    <canvas width="{{drawing.width}}" height="{{drawing.height}}" id="canvas-canvas" class="canvas"
+            ng-mousedown="currentTool.init($event)" ng-mousemove="currentTool.drag($event)" ng-mouseup="currentTool.drop($event)"></canvas>
+    <canvas width="{{drawing.width}}" height="{{drawing.height}}" id="canvas-aux" class="canvas" 
+            ng-mousedown="currentTool.init($event)" ng-mousemove="currentTool.drag($event)" ng-mouseup="currentTool.drop($event)"></canvas>
+</div>
