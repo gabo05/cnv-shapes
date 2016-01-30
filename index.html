@@ -39,7 +39,7 @@
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
         </nav>
-        <div class="section no-pad-bot" ng-controller="canvasCtrl as cnv">
+        <div class="section no-pad-bot" ng-controller="canvasController as cnv">
             <div class="row">
                 <div class="col l3 m3 s12">
                     <ul class="collapsible" data-collapsible="expandable">
@@ -72,6 +72,8 @@
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <!--Import materialize.js-->
         <script src="bower_components/Materialize/dist/js/materialize.min.js"></script>
+        <!--Import providers-->
+        <script src="app/providers/values-provider.js"></script>
         <!--Import angular custom directives-->
         <script src="app/directives/colorpicker.js"></script>
         <script src="app/directives/toolbox-item.js"></script>
@@ -79,8 +81,13 @@
         <script src="app/directives/line-settings.js"></script>
         <script src="app/directives/drawing-area.js"></script>
         
+        <!--Factories-->
+        <script src="app/factories/canvas-factory.js"></script>
+        <script src="app/factories/shapes-factory.js"></script>
+        <script src="app/factories/drawing-factory.js"></script>
+        
         <!--Import angular controllers-->
-        <script src="app/controllers/canvas-ctrl.js"></script>
+        <script src="app/controllers/canvas-controller.js"></script>
         
         <!--Import AngularJS app-->
         <script src="app/cnv-shapes.js"></script>

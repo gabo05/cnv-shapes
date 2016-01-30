@@ -1,4 +1,4 @@
-var colorpicker = function(){
+var colorpicker = function(valuesProvider){
     return{
         restrict: 'E',
         templateUrl: 'app/templates/colorpicker.html',
@@ -11,20 +11,22 @@ var colorpicker = function(){
             this.green = 127;
             this.blue = 127;
             this.alpha = 100;
-            $scope.RGBA = 'rgba('+this.red+','+this.green+','+this.blue+','+(this.alpha/100)+')';
+            this.rgba = 'rgba('+this.red+','+this.green+','+this.blue+','+(this.alpha/100)+')';
             
         }],
         scope:false,
         link: function(scope, element, attrs){
 
-            var updatePreview = function(newValue, oldValue){
+            var updateProvider = function(newValue, oldValue){
                 var colorpicker = element.controller('colorpicker');
-                scope.RGBA = 'rgba('+colorpicker.red+','+colorpicker.green+','+colorpicker.blue+','+(colorpicker.alpha/100)+')';
+                
+                colorpicker.rgba = 'rgba('+colorpicker.red+','+colorpicker.green+','+colorpicker.blue+','+(colorpicker.alpha/100)+')';
+                valuesProvider.setValue('color', colorpicker.rgba);
             };
-            scope.$watch('colorpicker.red', updatePreview);
-            scope.$watch('colorpicker.green', updatePreview);
-            scope.$watch('colorpicker.blue', updatePreview);
-            scope.$watch('colorpicker.alpha', updatePreview);
+            scope.$watch('colorpicker.red', updateProvider);
+            scope.$watch('colorpicker.green', updateProvider);
+            scope.$watch('colorpicker.blue', updateProvider);
+            scope.$watch('colorpicker.alpha', updateProvider);
         }
     }
 };
