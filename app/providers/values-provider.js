@@ -1,6 +1,9 @@
 var valuesProvider = function(){
     this.values = {};
-    this.values.color= 'rgba(127,127,127,1)';
+    this.values.fillColor= 'rgba(127,127,127,1)';
+    this.values.lineColor= 'rgba(127,127,127,1)';
+    this.values.fillAlpha = 1;
+    this.values.lineAlpha = 1;
     this.values.lineWidth= 1;
     this.values.dashed= false;
     this.values.dashedWidth= 0;

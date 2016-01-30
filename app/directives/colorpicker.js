@@ -14,14 +14,16 @@ var colorpicker = function(valuesProvider){
             this.rgba = 'rgba('+this.red+','+this.green+','+this.blue+','+(this.alpha/100)+')';
             
         }],
-        scope:false,
+        scope:true,
         link: function(scope, element, attrs){
-
+            var colorpicker = element.controller('colorpicker');
+            
+            colorpicker.name = attrs.name;
             var updateProvider = function(newValue, oldValue){
                 var colorpicker = element.controller('colorpicker');
                 
                 colorpicker.rgba = 'rgba('+colorpicker.red+','+colorpicker.green+','+colorpicker.blue+','+(colorpicker.alpha/100)+')';
-                valuesProvider.setValue('color', colorpicker.rgba);
+                valuesProvider.setValue(colorpicker.name+'Color', colorpicker.rgba);
             };
             scope.$watch('colorpicker.red', updateProvider);
             scope.$watch('colorpicker.green', updateProvider);

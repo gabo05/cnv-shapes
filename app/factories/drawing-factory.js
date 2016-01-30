@@ -23,5 +23,17 @@ var drawingFactory = function(){
         if(!asPath)
             ctx.closePath();
     };
+    drawingFact.drawRect = function(ctx, rect){
+        ctx.setLineDash([rect.dashedWidth, rect.dashedSpacing])
+        if(rect.fill){
+            ctx.fillStyle = rect.fillColor;
+            ctx.fillRect(rect.startPoint.x,rect.startPoint.y,rect.width,rect.height);
+        }
+        if(rect.stroke){
+            ctx.strokeStyle = rect.strokeColor;
+            ctx.lineWidth = rect.lineWidth;
+            ctx.strokeRect(rect.startPoint.x,rect.startPoint.y,rect.width,rect.height);
+        }
+    }
     return drawingFact;
 }

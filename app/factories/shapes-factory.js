@@ -32,18 +32,27 @@ var Curve = function(){
     this.controlY2 = 0;
 }
 
-var Rect = function(t,xa,ya,w,h,c,lw){
-    this.type = t;
-    this.x = xa;
-    this.y = ya;
+var Rect = function(p,w,h,sc, fc, lw, dw, ds, f, s){
+    this.type = 2;
+    this.startPoint = p;
     this.width = w;
     this.height = h;
-    this.fillColor = c;
-    this.strokeColor = c;
+    this.fillColor = fc;
+    this.strokeColor = sc;
     this.lineWidth = lw;
+    if(dw)
+        this.dashedWidth = dw;
+    else
+        this.dashedWidth = 0;
+    if(ds)
+        this.dashedSpacing = ds;
+    else
+        this.dashedSpacing = 0;
+    this.fill = f;
+    this.stroke = s;
 }
 
-var Arc = function(t,xa,ya,r,a,c,lw){
+var Arc = function(t,xa,ya,r,a,c,lw, dw, ds){
     this.type = t;
     this.x = xa;
     this.y = ya;
@@ -52,9 +61,17 @@ var Arc = function(t,xa,ya,r,a,c,lw){
     this.fillColor = c;
     this.strokeColor = c;
     this.lineWidth = lw;
+    if(dw)
+        this.dashedWidth = dw;
+    else
+        this.dashedWidth = 0;
+    if(ds)
+        this.dashedSpacing = ds;
+    else
+        this.dashedSpacing = 0;
 }
 
-var Path = function(c,lw,t){
+var Path = function(c,lw,t, dw, ds){
     this.type = t;
     this.points = [];
     this.color = c;
@@ -79,11 +96,19 @@ var Path = function(c,lw,t){
     this.getLastPoint = function(){
         return this.points[this.points.length-1];
     }
+    if(dw)
+        this.dashedWidth = dw;
+    else
+        this.dashedWidth = 0;
+    if(ds)
+        this.dashedSpacing = ds;
+    else
+        this.dashedSpacing = 0;
 }
 var shapesFactory = function(valuesProvider){
     var shapesFactory = {};
     
-    shapesFactory.createPoint= function($event){
+    shapesFactory.createPoint = function($event){
         if($event.offsetX && $event.offsetY)
             return { 
                 x: $event.offsetX,
@@ -98,9 +123,13 @@ var shapesFactory = function(valuesProvider){
             };
         }
     };
-    shapesFactory.createLine= function(point1, point2){
-        return new Line(point1, point2, valuesProvider.getValue('color'), valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'));
+    shapesFactory.createLine = function(point1, point2){
+        return new Line(point1, point2, valuesProvider.getValue('lineColor'), valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'));
     };
-    
+    shapesFactory.createRect = function(point, width, heigth){
+        var isFilled = valuesProvider.getValue('fillAlpha') > 0;
+        var isStroked = valuesProvider.getValue('lineAlpha') > 0;
+        return new Rect(point, width, heigth, valuesProvider.getValue('lineColor'), valuesProvider.getValue('fillColor'), valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'), isFilled, isStroked);
+    };
     return shapesFactory;
 }
