@@ -34,6 +34,25 @@ var drawingFactory = function(){
             ctx.lineWidth = rect.lineWidth;
             ctx.strokeRect(rect.startPoint.x,rect.startPoint.y,rect.width,rect.height);
         }
+    };
+    drawingFact.drawArc = function(ctx, arc){
+        if(arc.stroke){
+            ctx.setLineDash([arc.dashedWidth, arc.dashedSpacing]);
+            ctx.strokeStyle = arc.strokeColor;
+            ctx.lineWidth = arc.lineWidth;
+        }
+        if(arc.fill){
+            ctx.fillStyle = arc.fillColor;
+        }
+        ctx.beginPath();
+        ctx.arc(arc.center.x,arc.center.y,arc.radio,0,arc.angle,true);
+        ctx.closePath();
+        if(arc.fill){
+            ctx.fill();
+        }
+        if(arc.stroke){
+            ctx.stroke();
+        }
     }
     return drawingFact;
 }

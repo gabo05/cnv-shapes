@@ -52,14 +52,13 @@ var Rect = function(p,w,h,sc, fc, lw, dw, ds, f, s){
     this.stroke = s;
 }
 
-var Arc = function(t,xa,ya,r,a,c,lw, dw, ds){
-    this.type = t;
-    this.x = xa;
-    this.y = ya;
+var Arc = function(c, r, a, fc, lc, lw, dw, ds, f, s){
+    this.type = 3;
+    this.center = c;
     this.radio = r;
     this.angle = a;
-    this.fillColor = c;
-    this.strokeColor = c;
+    this.fillColor = fc;
+    this.strokeColor = lc;
     this.lineWidth = lw;
     if(dw)
         this.dashedWidth = dw;
@@ -69,6 +68,8 @@ var Arc = function(t,xa,ya,r,a,c,lw, dw, ds){
         this.dashedSpacing = ds;
     else
         this.dashedSpacing = 0;
+    this.fill = f;
+    this.stroke = s;
 }
 
 var Path = function(c,lw,t, dw, ds){
@@ -131,5 +132,10 @@ var shapesFactory = function(valuesProvider){
         var isStroked = valuesProvider.getValue('lineAlpha') > 0;
         return new Rect(point, width, heigth, valuesProvider.getValue('lineColor'), valuesProvider.getValue('fillColor'), valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'), isFilled, isStroked);
     };
+    shapesFactory.createArc = function(center, radius, angle){
+        var isFilled = valuesProvider.getValue('fillAlpha') > 0;
+        var isStroked = valuesProvider.getValue('lineAlpha') > 0;
+        return new Arc(center, radius, angle, valuesProvider.getValue('fillColor'), valuesProvider.getValue('lineColor'),valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'), isFilled, isStroked)
+    }
     return shapesFactory;
 }

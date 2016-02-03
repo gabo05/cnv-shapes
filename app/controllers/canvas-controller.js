@@ -95,8 +95,54 @@ var canvasController = function($scope, canvasFactory, drawingFactory, shapesFac
         },
         circle: {
             name: 'circle',
-            init: function(){
-                console.log('Drawing a circle');
+            init: function($event){
+                var point = shapesFactory.createPoint($event);
+                
+                drawingFactory.setDrawing(true);
+                canvasFactory.setStartingPoint(point);
+                
+                console.log('Drawing a circle: '+JSON.stringify(point));
+            },
+            drag: function($event){
+                if(drawingFactory.isDrawing()){
+                    canvasFactory.clearAuxCanvas();
+
+                    var ctx = canvasFactory.getCanvasAuxContext();
+                    var endPoint = shapesFactory.createPoint($event);
+                    var startPoint = canvasFactory.getStartingPoint();
+                    
+                    var x = endPoint.x - startPoint.x;
+                    var y = endPoint.y - startPoint.y;
+                    
+                    var radio = Math.sqrt(((x*x)+(y*y)));
+                    var angle = Math.PI*2;
+                    
+                    var arc = shapesFactory.createArc(startPoint, radio, angle)
+
+                    drawingFactory.drawArc(ctx, arc, false);
+
+                    console.log('Line: drawing');
+                }
+            },
+            drop: function($event){
+                drawingFactory.setDrawing(false);
+                canvasFactory.clearAuxCanvas();
+
+                var ctx = canvasFactory.getCanvasContext();
+                var endPoint = shapesFactory.createPoint($event);
+                var startPoint = canvasFactory.getStartingPoint();
+
+                var x = endPoint.x - startPoint.x;
+                var y = endPoint.y - startPoint.y;
+
+                var radio = Math.sqrt(((x*x)+(y*y)));
+                var angle = Math.PI*2;
+
+                var arc = shapesFactory.createArc(startPoint, radio, angle)
+
+                drawingFactory.drawArc(ctx, arc, false);
+
+                console.log('Line: drawing');
             }
         },
         polygon: {
