@@ -1,4 +1,4 @@
-var canvasController = function($scope, canvasFactory, drawingFactory, shapesFactory){
+var canvasController = function($scope, canvasFactory, drawingFactory, shapesFactory, valuesProvider){
     
     $scope.tools = {
         line: {
@@ -140,7 +140,7 @@ var canvasController = function($scope, canvasFactory, drawingFactory, shapesFac
 
                 var arc = shapesFactory.createArc(startPoint, radio, angle)
 
-                drawingFactory.drawArc(ctx, arc, false);
+                drawingFactory.drawArc(ctx, arc);
 
                 console.log('Line: drawing');
             }
@@ -207,8 +207,23 @@ var canvasController = function($scope, canvasFactory, drawingFactory, shapesFac
         },
         brush: {
             name: 'brush',
-            init: function(){
+            init: function($event){
+                drawingFactory.setDrawing(true);
                 console.log('Drawing a brush');
+            },
+            drag: function($event){
+                if(drawingFactory.isDrawing()){
+                    var point = shapesFactory.createPoint($event);
+                    var ctx = canvasFactory.getCanvasContext();
+                    var radio = valuesProvider.getValue('lineWidth');
+                    var angle = Math.PI*2;
+                    var circle = shapesFactory.createArc(point, radio, angle, true)
+
+                    drawingFactory.drawArc(ctx, circle);
+                }
+            },
+            drop: function($event){
+                drawingFactory.setDrawing(false);
             }
         }
     };

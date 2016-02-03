@@ -132,10 +132,16 @@ var shapesFactory = function(valuesProvider){
         var isStroked = valuesProvider.getValue('lineAlpha') > 0;
         return new Rect(point, width, heigth, valuesProvider.getValue('lineColor'), valuesProvider.getValue('fillColor'), valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'), isFilled, isStroked);
     };
-    shapesFactory.createArc = function(center, radius, angle){
-        var isFilled = valuesProvider.getValue('fillAlpha') > 0;
-        var isStroked = valuesProvider.getValue('lineAlpha') > 0;
-        return new Arc(center, radius, angle, valuesProvider.getValue('fillColor'), valuesProvider.getValue('lineColor'),valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'), isFilled, isStroked)
+    shapesFactory.createArc = function(center, radius, angle, isfree){
+        var isFilled = valuesProvider.getValue('fillAlpha') > 0 || isfree;
+        var isStroked = valuesProvider.getValue('lineAlpha') > 0 && !isfree;
+        var fillColor;
+        if(isfree)
+            fillColor = valuesProvider.getValue('lineColor');
+        else
+            fillColor = valuesProvider.getValue('fillColor');
+        
+        return new Arc(center, radius, angle, fillColor, valuesProvider.getValue('lineColor'),valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'), isFilled, isStroked)
     }
     return shapesFactory;
 }
