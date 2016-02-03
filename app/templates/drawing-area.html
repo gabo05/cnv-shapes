@@ -1,7 +1,7 @@
 <div class="col l9 m9 s12" id="drawing-container">
     <textarea id="canvas-text-writer"></textarea>
     <canvas width="{{drawing.width}}" height="{{drawing.height}}" id="real-canvas" class="canvas"></canvas>
-    <canvas width="{{drawing.width}}" height="{{drawing.height}}" id="aux-canvas" class="canvas" 
+    <canvas width="{{drawing.width}}" height="{{drawing.height}}" id="aux-canvas" class="canvas" ng-dblclick="currentTool.end($event)"
             ng-mousedown="currentTool.init($event)" ng-mousemove="currentTool.drag($event)" ng-mouseup="currentTool.drop($event)"></canvas>
 </div>
 

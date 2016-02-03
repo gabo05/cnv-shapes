@@ -53,6 +53,21 @@ var drawingFactory = function(){
         if(arc.stroke){
             ctx.stroke();
         }
+    };
+    drawingFact.beginPath = function(ctx, line){
+        ctx.beginPath();
+        ctx.setLineDash([line.dashedWidth, line.dashedSpacing]);
+        ctx.strokeStyle = line.color;
+        ctx.lineWidth = line.width;
+        ctx.moveTo(line.startPoint.x,line.startPoint.y);
+        ctx.lineJoin = 'miter';
+    };
+    drawingFact.drawPath = function(ctx, endPoint){
+        ctx.lineTo(endPoint.x, endPoint.y);
+        ctx.stroke();
+    };
+    drawingFact.endPath = function(ctx){
+        ctx.closePath();
     }
     return drawingFact;
 }

@@ -153,8 +153,50 @@ var canvasController = function($scope, canvasFactory, drawingFactory, shapesFac
         },
         free: {
             name: 'free',
-            init: function(){
-                console.log('Drawing a free');
+            init: function($event){
+                var point = shapesFactory.createPoint($event);
+                canvasFactory.setStartingPoint(point);
+                if(!drawingFactory.isDrawing()){
+
+                    drawingFactory.setDrawing(true);
+
+                    var initLine = shapesFactory.createLine(point, point);
+
+                    var ctx = canvasFactory.getCanvasContext();
+                    //var ctxaux = canvasFactory.getCanvasAuxContext();
+
+                    drawingFactory.beginPath(ctx, initLine);
+                    //drawingFactory.beginPath(ctxaux, initLine);
+
+                    console.log('Drawing a free');
+                }
+            },
+            drag: function($event){
+                if(drawingFactory.isDrawing()){
+                    canvasFactory.clearAuxCanvas();
+                    
+                    var point = shapesFactory.createPoint($event);
+                    var ctx = canvasFactory.getCanvasAuxContext();
+                    
+                    var auxline = shapesFactory.createLine(canvasFactory.getStartingPoint(), point);
+                    
+                    drawingFactory.drawLine(ctx, auxline);
+                }
+            },
+            drop: function($event){
+                
+                canvasFactory.clearAuxCanvas();
+                
+                var point = shapesFactory.createPoint($event);
+                var ctx = canvasFactory.getCanvasContext();
+                
+                drawingFactory.drawPath(ctx, point);
+            },
+            end: function($event){
+                drawingFactory.setDrawing(false);
+                var ctx = canvasFactory.getCanvasContext();
+                drawingFactory.endPath(ctx);
+                console.log('end');
             }
         },
         text: {
