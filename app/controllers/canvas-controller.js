@@ -1,231 +1,71 @@
-var canvasController = function($scope, canvasFactory, drawingFactory, shapesFactory, valuesProvider){
+var canvasController = function($scope, canvasFactory, drawingFactory, shapesFactory, valuesProvider, lineService, brushService, circleService, freeService, squareService, curveService, pencilService, textService){
+    
+    $scope.isTouchDevice = function(){
+        return "ontouchstart" in window || navigator.msMaxTouchPoints;
+    };
     
     $scope.tools = {
-        line: {
-            name: 'line',
-            init: function($event){
-                var point = shapesFactory.createPoint($event);
-                
-                drawingFactory.setDrawing(true);
-                canvasFactory.setStartingPoint(point);
-                
-                console.log('Drawing a line: '+JSON.stringify(point));
-            },
-            drag: function($event){
-                if(drawingFactory.isDrawing()){
-                    canvasFactory.clearAuxCanvas();
-
-                    var ctx = canvasFactory.getCanvasAuxContext();
-                    var endPoint = shapesFactory.createPoint($event);
-                    var startPoint = canvasFactory.getStartingPoint();
-                    
-                    var line = shapesFactory.createLine(startPoint, endPoint);
-
-                    drawingFactory.drawLine(ctx, line, false);
-
-                    console.log('Line: drawing');
+        line: lineService,
+        curve: curveService,
+        square: squareService,
+        circle: circleService,
+        pencil: pencilService,
+        free: freeService,
+        text: textService,
+        brush: brushService
+    };
+    
+    $scope.drawer = {
+        init: function($event){
+            if($scope.currentTool){
+                var point;
+                if($scope.isTouchDevice()){
+                    point = shapesFactory.createPoint($event.touches.item(0));
                 }
-            },
-            drop: function($event){
-                drawingFactory.setDrawing(false);
-                canvasFactory.clearAuxCanvas();
-                
-                var ctx = canvasFactory.getCanvasContext();
-                var endPoint = shapesFactory.createPoint($event);
-                var startPoint = canvasFactory.getStartingPoint();
-                
-                var line = shapesFactory.createLine(startPoint, endPoint);
-                
-                drawingFactory.drawLine(ctx, line, false);
-                
-                console.log('Line drop');
-            }
-        },
-        curve: {
-            name: 'curve',
-            init: function(){
-                
-            }
-        },
-        square: {
-            name: 'square',
-            init: function($event){
-                var point = shapesFactory.createPoint($event);
-                
-                drawingFactory.setDrawing(true);
-                canvasFactory.setStartingPoint(point);
-                
-                console.log('Drawing a square: '+JSON.stringify(point));
-            },
-            drag: function($event){
-                if(drawingFactory.isDrawing()){
-                    canvasFactory.clearAuxCanvas();
-
-                    var ctx = canvasFactory.getCanvasAuxContext();
-                    var endPoint = shapesFactory.createPoint($event);
-                    var startPoint = canvasFactory.getStartingPoint();
-                    
-                    var width = endPoint.x - startPoint.x;
-                    var heigth = endPoint.y - startPoint.y;
-                    
-                    var rect = shapesFactory.createRect(startPoint, width, heigth)
-
-                    drawingFactory.drawRect(ctx, rect, false);
-
-                    console.log('Line: drawing');
+                else{
+                    point = shapesFactory.createPoint($event);
                 }
-            },
-            drop: function($event){
-                drawingFactory.setDrawing(false);
-                canvasFactory.clearAuxCanvas();
-                
-                var ctx = canvasFactory.getCanvasContext();
-                var endPoint = shapesFactory.createPoint($event);
-                var startPoint = canvasFactory.getStartingPoint();
-                
-                var width = endPoint.x - startPoint.x;
-                var height = endPoint.y - startPoint.y;
-                
-                var rect = shapesFactory.createRect(startPoint, width, height);
-                
-                drawingFactory.drawRect(ctx, rect, false);
-                
-                console.log('Rect drop');
+                $scope.currentTool.init(point);
             }
         },
-        circle: {
-            name: 'circle',
-            init: function($event){
-                var point = shapesFactory.createPoint($event);
-                
-                drawingFactory.setDrawing(true);
-                canvasFactory.setStartingPoint(point);
-                
-                console.log('Drawing a circle: '+JSON.stringify(point));
-            },
-            drag: function($event){
-                if(drawingFactory.isDrawing()){
-                    canvasFactory.clearAuxCanvas();
-
-                    var ctx = canvasFactory.getCanvasAuxContext();
-                    var endPoint = shapesFactory.createPoint($event);
-                    var startPoint = canvasFactory.getStartingPoint();
-                    
-                    var x = endPoint.x - startPoint.x;
-                    var y = endPoint.y - startPoint.y;
-                    
-                    var radio = Math.sqrt(((x*x)+(y*y)));
-                    var angle = Math.PI*2;
-                    
-                    var arc = shapesFactory.createArc(startPoint, radio, angle)
-
-                    drawingFactory.drawArc(ctx, arc, false);
-
-                    console.log('Line: drawing');
+        drag: function($event){
+            if($scope.currentTool){
+                var point;
+                if($scope.isTouchDevice()){
+                    point = shapesFactory.createPoint($event.touches.item(0));
                 }
-            },
-            drop: function($event){
-                drawingFactory.setDrawing(false);
-                canvasFactory.clearAuxCanvas();
-
-                var ctx = canvasFactory.getCanvasContext();
-                var endPoint = shapesFactory.createPoint($event);
-                var startPoint = canvasFactory.getStartingPoint();
-
-                var x = endPoint.x - startPoint.x;
-                var y = endPoint.y - startPoint.y;
-
-                var radio = Math.sqrt(((x*x)+(y*y)));
-                var angle = Math.PI*2;
-
-                var arc = shapesFactory.createArc(startPoint, radio, angle)
-
-                drawingFactory.drawArc(ctx, arc);
-
-                console.log('Line: drawing');
-            }
-        },
-        polygon: {
-            name: 'polygon',
-            init: function(){
-                console.log('Drawing a polygon');
-            }
-        },
-        free: {
-            name: 'free',
-            init: function($event){
-                var point = shapesFactory.createPoint($event);
-                canvasFactory.setStartingPoint(point);
-                if(!drawingFactory.isDrawing()){
-
-                    drawingFactory.setDrawing(true);
-
-                    var initLine = shapesFactory.createLine(point, point);
-
-                    var ctx = canvasFactory.getCanvasContext();
-                    //var ctxaux = canvasFactory.getCanvasAuxContext();
-
-                    drawingFactory.beginPath(ctx, initLine);
-                    //drawingFactory.beginPath(ctxaux, initLine);
-
-                    console.log('Drawing a free');
+                else{
+                    point = shapesFactory.createPoint($event);
                 }
-            },
-            drag: function($event){
-                if(drawingFactory.isDrawing()){
-                    canvasFactory.clearAuxCanvas();
-                    
-                    var point = shapesFactory.createPoint($event);
-                    var ctx = canvasFactory.getCanvasAuxContext();
-                    
-                    var auxline = shapesFactory.createLine(canvasFactory.getStartingPoint(), point);
-                    
-                    drawingFactory.drawLine(ctx, auxline);
-                }
-            },
-            drop: function($event){
-                
-                canvasFactory.clearAuxCanvas();
-                
-                var point = shapesFactory.createPoint($event);
-                var ctx = canvasFactory.getCanvasContext();
-                
-                drawingFactory.drawPath(ctx, point);
-            },
-            end: function($event){
-                drawingFactory.setDrawing(false);
-                var ctx = canvasFactory.getCanvasContext();
-                drawingFactory.endPath(ctx);
-                console.log('end');
+                $scope.currentTool.drag(point);
             }
         },
-        text: {
-            name: 'text',
-            init: function(){
-                console.log('Drawing a text');
+        drop: function($event){
+            if($scope.currentTool){
+                var point;
+                if($scope.isTouchDevice()){
+                    point = shapesFactory.createPoint($event.touches.item(0));
+                }
+                else{
+                    point = shapesFactory.createPoint($event);
+                }
+                $scope.currentTool.drop(point);
             }
         },
-        brush: {
-            name: 'brush',
-            init: function($event){
-                drawingFactory.setDrawing(true);
-                console.log('Drawing a brush');
-            },
-            drag: function($event){
-                if(drawingFactory.isDrawing()){
-                    var point = shapesFactory.createPoint($event);
-                    var ctx = canvasFactory.getCanvasContext();
-                    var radio = valuesProvider.getValue('lineWidth');
-                    var angle = Math.PI*2;
-                    var circle = shapesFactory.createArc(point, radio, angle, true)
-
-                    drawingFactory.drawArc(ctx, circle);
+        end: function($event){
+            if($scope.currentTool){
+                var point;
+                if($scope.isTouchDevice()){
+                    point = shapesFactory.createPoint($event.touches.item(0));
                 }
-            },
-            drop: function($event){
-                drawingFactory.setDrawing(false);
+                else{
+                    point = shapesFactory.createPoint($event);
+                }
+                $scope.currentTool.end(point);
             }
         }
     };
+    
+    
 };
 

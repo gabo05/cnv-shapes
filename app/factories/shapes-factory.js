@@ -110,19 +110,23 @@ var shapesFactory = function(valuesProvider){
     var shapesFactory = {};
     
     shapesFactory.createPoint = function($event){
-        if($event.offsetX && $event.offsetY)
-            return { 
-                x: $event.offsetX,
-                y: $event.offsetY
-            };
-        else{
-            var x = $event.clientX - $event.currentTarget.offsetLeft;
-            var y = $event.clientY - $event.currentTarget.offsetTop;
-            return {
-                x: x,
-                y: y
-            };
+        var x;
+        var y;
+        if ($event.pageX != undefined && $event.pageY != undefined) {
+            x = $event.pageX;
+            y = $event.pageY;
         }
+        else {
+            x = $event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            y = $event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+        }
+        x -= $event.currentTarget.offsetLeft;
+        y -= $event.currentTarget.offsetTop;
+
+        return {
+            x: x,
+            y: y
+        };
     };
     shapesFactory.createLine = function(point1, point2){
         return new Line(point1, point2, valuesProvider.getValue('lineColor'), valuesProvider.getValue('lineWidth'), valuesProvider.getValue('dashedWidth'), valuesProvider.getValue('dashedSpacing'));
