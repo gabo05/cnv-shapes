@@ -4,7 +4,7 @@
     var app = angular.module('cnvShapes', []);
     
     ///Providers
-    app.provider('valuesProvider', valuesProvider);
+    app.factory('valuesProvider', valuesProvider);
     
     //Custom Directives
     app.directive('colorpicker', ['valuesProvider', colorpicker]);
@@ -28,9 +28,8 @@
     app.service('textService', ['shapesFactory', 'canvasFactory', 'drawingFactory', 'valuesProvider', textTool]);
     app.service('pencilService', ['shapesFactory', 'canvasFactory', 'drawingFactory', 'valuesProvider', pencilTool]);
     //Tools Factory
-    app.factory('toolsFactory', ['lineService', 'brushService', 'circleService', 'freeService', 'squareService', 'curveService', 'pencilService', 'textService', toolsFactory]);
-    
-    app.factory('socketFactory', ['toolsFactory', socketFactory]);
+    app.factory('toolsFactory', ['lineService', 'brushService', 'circleService', 'freeService', 'squareService', 'curveService', 'pencilService', 'textService', toolsFactory]);   
+    app.factory('socketFactory', ['toolsFactory', 'valuesProvider', socketFactory]);
     //Controllers
     app.controller('canvasController', ['$scope', 'canvasFactory', 'drawingFactory', 'shapesFactory', 'toolsFactory', 'socketFactory', 'valuesProvider', canvasController]);
 })();
