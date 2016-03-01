@@ -4,8 +4,6 @@ var circleTool = function(shapesFactory, canvasFactory, drawingFactory, valuesPr
         
         drawingFactory.setDrawing(true);
         canvasFactory.setStartingPoint(point);
-
-        console.log('Drawing a circle: '+JSON.stringify(point));
     };
     this.drag= function(point){
         if(drawingFactory.isDrawing()){
@@ -23,8 +21,6 @@ var circleTool = function(shapesFactory, canvasFactory, drawingFactory, valuesPr
             var arc = shapesFactory.createArc(startPoint, radio, angle)
 
             drawingFactory.drawArc(ctx, arc, false);
-
-            console.log('Line: drawing');
         }
     };
     this.drop= function(point){
@@ -43,7 +39,5 @@ var circleTool = function(shapesFactory, canvasFactory, drawingFactory, valuesPr
         var arc = shapesFactory.createArc(startPoint, radio, angle)
 
         drawingFactory.drawArc(ctx, arc);
-
-        console.log('Line: drawing');
     }
 };

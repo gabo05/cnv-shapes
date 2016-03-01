@@ -11,7 +11,7 @@
     app.directive('toolboxItem', toolboxItem);
     app.directive('toolbox', toolbox);
     app.directive('lineSettings', ['valuesProvider', lineSettings]);
-    app.directive('drawingArea', drawingArea);
+    app.directive('drawingArea', ['valuesProvider', drawingArea]);
     
     //Factories
     app.factory('canvasFactory', canvasFactory);

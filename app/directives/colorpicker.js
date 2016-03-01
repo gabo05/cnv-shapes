@@ -12,16 +12,16 @@ var colorpicker = function(valuesProvider){
             this.blue = 127;
             this.alpha = 100;
             this.rgba = 'rgba('+this.red+','+this.green+','+this.blue+','+(this.alpha/100)+')';
-            
+
         }],
         scope:true,
         link: function(scope, element, attrs){
             var colorpicker = element.controller('colorpicker');
-            
+
             colorpicker.name = attrs.name;
             var updateProvider = function(newValue, oldValue){
                 var colorpicker = element.controller('colorpicker');
-                
+
                 colorpicker.rgba = 'rgba('+colorpicker.red+','+colorpicker.green+','+colorpicker.blue+','+(colorpicker.alpha/100)+')';
                 valuesProvider.setValue(colorpicker.name+'Color', colorpicker.rgba);
             };

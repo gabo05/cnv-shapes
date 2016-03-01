@@ -18,7 +18,10 @@ var valuesProvider = function(){
             },
             getValue: function(key){
                 return vals[key];
+            },
+            isTouchDevice: function(){
+               return "ontouchstart" in window || navigator.msMaxTouchPoints;
             }
         };
-    }
+    };
 }
