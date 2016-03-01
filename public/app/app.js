@@ -17,7 +17,7 @@
     app.factory('canvasFactory', canvasFactory);
     app.factory('shapesFactory', ['valuesProvider',shapesFactory]);
     app.factory('drawingFactory', drawingFactory);
-    
+    //app.factory('socketEmitFactory', socketEmitFactory);
     //Services
     app.service('lineService', ['shapesFactory', 'canvasFactory', 'drawingFactory', 'valuesProvider', lineTool]);
     app.service('squareService', ['shapesFactory', 'canvasFactory', 'drawingFactory', 'valuesProvider', squareTool]);
@@ -27,7 +27,10 @@
     app.service('brushService', ['shapesFactory', 'canvasFactory', 'drawingFactory', 'valuesProvider', brushTool]);
     app.service('textService', ['shapesFactory', 'canvasFactory', 'drawingFactory', 'valuesProvider', textTool]);
     app.service('pencilService', ['shapesFactory', 'canvasFactory', 'drawingFactory', 'valuesProvider', pencilTool]);
+    //Tools Factory
+    app.factory('toolsFactory', ['lineService', 'brushService', 'circleService', 'freeService', 'squareService', 'curveService', 'pencilService', 'textService', toolsFactory]);
     
+    app.factory('socketFactory', ['toolsFactory', socketFactory]);
     //Controllers
-    app.controller('canvasController', ['$scope', 'canvasFactory', 'drawingFactory', 'shapesFactory', 'valuesProvider', 'lineService', 'brushService', 'circleService', 'freeService', 'squareService', 'curveService', 'pencilService', 'textService', canvasController]);
+    app.controller('canvasController', ['$scope', 'canvasFactory', 'drawingFactory', 'shapesFactory', 'toolsFactory', 'socketFactory', 'valuesProvider', canvasController]);
 })();

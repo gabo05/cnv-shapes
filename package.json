@@ -1,0 +1,20 @@
+{
+  "name": "cnv-shapes",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabo05/cnv-shapes.git"
+  },
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.4.5",
+    "bower": "^1.7.2"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "postinstall": "./node_modules/bower/bin/bower install"
+  }
+}

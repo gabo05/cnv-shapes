@@ -1,15 +1,6 @@
- var canvasController = function($scope, canvasFactory, drawingFactory, shapesFactory, valuesProvider, lineService, brushService, circleService, freeService, squareService, curveService, pencilService, textService){
-
-   $scope.tools = {
-       line: lineService,
-       curve: curveService,
-       square: squareService,
-       circle: circleService,
-       pencil: pencilService,
-       free: freeService,
-       text: textService,
-       brush: brushService
-   };
+ var canvasController = function($scope, canvasFactory, drawingFactory, shapesFactory, toolsFactory, socketFactory, valuesProvider){
+   socketFactory.startListening();
+   $scope.tools = toolsFactory.getTools();
     $scope.setMessage = function(msg){
        document.getElementById('te').innerHTML+=msg+'<br>';
     };
@@ -27,6 +18,9 @@
                else{
                    point = shapesFactory.createPoint($event);
                }
+               setTimeout(function(){
+                    socketFactory.start({tool: $scope.currentTool.name, point: point})
+               }, 0);
                $scope.currentTool.init(point);
            }
        },
@@ -43,6 +37,9 @@
                else{
                    point = shapesFactory.createPoint($event);
                }
+               setTimeout(function(){
+                   socketFactory.send({tool: $scope.currentTool.name, point: point})
+               }, 0);
                $scope.currentTool.drag(point);
            }
        },
@@ -60,6 +57,9 @@
                else{
                    point = shapesFactory.createPoint($event);
                }
+               setTimeout(function(){
+                   socketFactory.end({tool: $scope.currentTool.name, point: point})
+               }, 0);
                $scope.currentTool.drop(point);
               }
               catch(e){
@@ -84,6 +84,4 @@
            }
        }
    };
-
-
 };

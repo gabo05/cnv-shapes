@@ -19,6 +19,8 @@ var pencilTool = function(shapesFactory, canvasFactory, drawingFactory, valuesPr
         }
     };
     this.init= function(point){
+        //socketFactory.startListening();
+        
         this.drawingThreat = setInterval(this.drawingFunc, 5);
         
         drawingFactory.setDrawing(true);
@@ -39,17 +41,15 @@ var pencilTool = function(shapesFactory, canvasFactory, drawingFactory, valuesPr
     this.drag= function(point){
         if(drawingFactory.isDrawing()){
             this.points.push(point);
-
-            //socket.emit('sendpoint', JSON.stringify(point));
         }
     };
     this.drop= function(point){
         this.points.push(point);
 
-        //socket.emit('end', JSON.stringify(point));
-
+        //socketFactory.stopListening();
         drawingFactory.setDrawing(false);
     };
     this.end= function(point){
     }
+    
 };
