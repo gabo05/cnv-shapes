@@ -1,0 +1,25 @@
+#real-canvas{
+    border: 1px solid #c3c3c3;
+    z-index: 0;
+}
+#aux-canvas{
+    z-index: 1;
+    margin-top: -800px;
+}
+#drawing-container{
+    font-size: 0;
+}
+.canvas{
+    background-color:transparent;
+    cursor:crosshair;
+}
+.cns-tool-item{
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+.canvas-text-value{
+    width:30px;
+}
+#canvas-text-writer{
+    display: none;
+}
