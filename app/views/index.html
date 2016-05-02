@@ -81,8 +81,11 @@
         <script src="lib/Materialize/dist/js/materialize.min.js"></script>
         <!--Import socket.io-->
         <script src="/socket.io/socket.io.js"></script>
-        <!--Import providers-->
-        <script src="app/providers/values-provider.js"></script>
+        <!--Import AngularJS app-->
+        <script src="app/app.js"></script>
+        
+        <!--Import factory values providers-->
+        <script src="app/factories/values-factory.js"></script>
         <!--Import angular custom directives-->
         <script src="app/directives/colorpicker.js"></script>
         <script src="app/directives/toolbox-item.js"></script>
@@ -94,8 +97,6 @@
         <script src="app/factories/canvas-factory.js"></script>
         <script src="app/factories/shapes-factory.js"></script>
         <script src="app/factories/drawing-factory.js"></script>
-        <script src="app/factories/tools-factory.js"></script>
-        <script src="app/factories/socket-factory.js"></script>
         
         <!--Tools-->
         <script src="app/services/tools/brush-service.tool.js"></script>
@@ -107,10 +108,11 @@
         <script src="app/services/tools/square-service.tool.js"></script>
         <script src="app/services/tools/text-service.tool.js"></script>
         
+        <!--Other factories-->
+        <script src="app/factories/tools-factory.js"></script>
+        <script src="app/factories/socket-factory.js"></script>
+        
         <!--Import angular controllers-->
         <script src="app/controllers/canvas-controller.js"></script>
-        
-        <!--Import AngularJS app-->
-        <script src="app/app.js"></script>
     </body>
 </html>
